@@ -86,6 +86,14 @@ function book_plus(){
         form.submit();
     }
 }
+        function book_reset(){
+        const form = document.book_request_form;
+    	form.book_img.value = '';
+    	form.book_title.value = '';
+    	form.book_author.value = '';
+    	form.book_publisher.value = '';
+    	form.book_category.selectedIndex = 0;  
+    }
 </script>
 </body>
 </html>

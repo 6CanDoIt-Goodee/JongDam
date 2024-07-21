@@ -62,7 +62,6 @@ public class BookApplyDao {
 	         rs = pstmt.executeQuery();
 	           while(rs.next()){
 	                   Map<String, String> row = new HashMap<>();
-	           
 	                   row.put("apply_no",rs.getString("신청번호"));
 	                   row.put("apply_bk_title", rs.getString("신청도서"));
 	                   row.put("appy_bk_author", rs.getString("신청작가"));

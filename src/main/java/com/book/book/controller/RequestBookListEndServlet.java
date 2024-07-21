@@ -28,8 +28,7 @@ public class RequestBookListEndServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int apply_no = (Integer.parseInt(request.getParameter("apply_no")));
-
+		int apply_no = (Integer.parseInt(request.getParameter("")));
 		BookApply option = new BookApply();
 		option.setApply_no(apply_no);
 		
@@ -37,7 +36,7 @@ public class RequestBookListEndServlet extends HttpServlet {
 		if(nowPage != null) {
 			option.setNowPage(Integer.parseInt(nowPage));
 		}
-//		전체 목록 개수 -> 페이징 바 구성
+//	
 		option.setTotalData(new BookApplyDao().selectBookApplyCount(option));
 		
 		List<Map<String,String>> list =  new BookApplyDao().SelectBookApplyList(option);
@@ -53,7 +52,8 @@ public class RequestBookListEndServlet extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
 		doGet(request, response);
 	}
 

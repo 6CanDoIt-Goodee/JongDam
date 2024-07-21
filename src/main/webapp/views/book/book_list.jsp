@@ -23,7 +23,7 @@
                     <ul>
             			<li><a href="/book/create">도서 등록</a></li>
 						<li><a href="/book/list">도서 목록조회</a></li>
-						<li><a href="/book/">도서 신청목록</a>
+						<li><a href="/book/rqeuestEnd">도서 신청목록</a>
                     </ul>
                 </li>
                 <li>문의 사항 관련 페이지

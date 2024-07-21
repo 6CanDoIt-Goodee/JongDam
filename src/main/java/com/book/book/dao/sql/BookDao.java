@@ -36,6 +36,8 @@ public class BookDao {
       return result;
    }
    
+   
+
    public int selectBookCount(Book option) {
       Connection conn = getConnection();
       int result = 0;

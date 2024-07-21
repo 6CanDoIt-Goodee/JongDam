@@ -23,6 +23,7 @@ public class EditBookServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("확인");
 		String bookimg = request.getParameter("book_img");
 		String booktitle = request.getParameter("book_title");
 		String bookauthor = request.getParameter("book_author");

@@ -28,7 +28,7 @@
             	<ul>
             		<li><a href="/book/create">도서 등록</a></li>
 					<li><a href="/book/list">도서 목록조회</a></li>
-					<li><a href="/book/request">도서 신청 조회</a></li>
+					<li><a href="/book/requestEnd">도서 신청 조회</a></li>
             	</ul>
             <li>문의 사항 관리 페이지</li>
         </ul>
