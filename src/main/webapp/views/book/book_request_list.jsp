@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>도서 목록</title>
+<title>도서 신청 목록 페이지</title>
 <link rel="stylesheet" href="../../resources/css/book_list.css">
 </head>
 <body>
@@ -23,7 +23,7 @@
                     <ul>
             			<li><a href="/book/create">도서 등록</a></li>
 						<li><a href="/book/list">도서 목록조회</a></li>
-						<li><a href="/book/">도서 신청목록</a>
+						<li><a href="/book/request">도서 신청목록</a>
                     </ul>
                 </li>
                 <li>문의 사항 관련 페이지
@@ -63,30 +63,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <%@ page import="com.book.book.controller.BookListServlet, java.util.*" %>
-                        <%
+                        <%@ page import="com.book.book.controller.RequestBookListEndServlet, java.util.*" %>
+                         <%
                         List<Map<String,String>> list = (List<Map<String,String>>)request.getAttribute("resultList");
                             for(int i = 0 ; i < list.size(); i++){ 
                             %>
                                 <tr>
-                                    <td><%=list.get(i).get("books_img") %></td> 
-                                    <td><%=list.get(i).get("books_title")%></td>
-                                    <td><%=list.get(i).get("books_author")%></td>
-                                    <td><%=list.get(i).get("books_category_name")%></td>
-                                    <td><%=list.get(i).get("books_publisher_name")%></td>
-									<td>
-										<form action="/book/edit" method="post">
-	                                    	<input type="submit" value="수정">
+                                    <td><%=list.get(i).get("apply_no") %></td> 
+                                    <td><%=list.get(i).get("apply_bk_title")%></td>
+                                    <td><%=list.get(i).get("appy_bk_author")%></td>
+                                    <td><%=list.get(i).get("apply_bk_publisher")%></td>
+									<td> 
+										<form action="/book/edit?books_no=" method="post">
+	                                    	<input type="submit" value="등록">
 	                                	</form>
                                 	</td>
                                 	<td>
 		                                <form action="/deleteend/book" method="post">
-		                                	<input type="hidden" id="books_img" name="books_img" value="<%=list.get(i).get("books_img") %>">
-		                                    <input type="submit" value="삭제">
+		                                	<input type="hidden" id="books_img" name="books_img" <%-- value="<%=list.get(i).get("books_img") %>" --%>>
+		                                    <input type="submit" value="반려">
 		                                </form>
 	                                </td>
                                 </tr>
-                        <%}%>
+                         <%}%> 
                     </tbody>
                 </table>
             </div>
