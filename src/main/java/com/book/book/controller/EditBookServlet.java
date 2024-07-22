@@ -34,15 +34,22 @@ public class EditBookServlet extends HttpServlet {
 		System.out.println(bookpublisher);
 		int bookcategory = Integer.parseInt(request.getParameter("book_category"));
 		System.out.println(bookcategory);
+		int bookno = Integer.parseInt(request.getParameter("book_no"));
+		System.out.println(bookno);
 		Book bk = new Book();
 		bk.setBook_img(bookimg);
 		bk.setBook_title(booktitle);
 		bk.setBook_author(bookauthor);
 		bk.setBook_publisher_name(bookpublisher);
 		bk.setBook_category_no(bookcategory);
-		new BookDao().editBook(bk);
+		bk.setBook_no(bookno);
+		int result = new BookDao().editBook(bk);
+	    if (result > 0) {
+	        System.out.println("도서 정보가 성공적으로 수정되었습니다.");
+	    } else {
+	        System.out.println("도서 정보 수정에 실패했습니다.");
+	    }
 		RequestDispatcher view = null;
-
 			view = request.getRequestDispatcher("/book/list");
 			view.forward(request, response);
 	}

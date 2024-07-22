@@ -7,22 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.book.book.dao.sql.BookApplyDao;
 import com.book.book.dao.sql.BookDao;
 import com.book.book.vo.Book;
-import com.book.book.vo.BookApply;
 
 
-@WebServlet("/book/createEnd")
-public class CreateBookEndServlet extends HttpServlet {
+@WebServlet("/book/registerEnd")
+public class RequestBookRegisterEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
- 
-    public CreateBookEndServlet() {
-        super();
-       
-    }
 
+    public RequestBookRegisterEndServlet() {
+    }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String bookimg = request.getParameter("book_img");
@@ -38,8 +33,9 @@ public class CreateBookEndServlet extends HttpServlet {
 		bk.setBook_category_no(bookcategory);
 		int result = new BookDao().createBook(bk);
 		System.out.println(result);
+		
 		response.sendRedirect("/book/create");
-		}
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");

@@ -168,7 +168,8 @@ public class BookDao {
          pstmt.setInt(4, bk.getBook_category_no());
          pstmt.setString(5, bk.getBook_publisher_name());
          pstmt.setInt(6, bk.getBook_no());
-         
+         result = pstmt.executeUpdate();
+         System.out.println("books_no: " + bk.getBook_no());
       } catch (Exception e) {
          e.printStackTrace();
       } finally {

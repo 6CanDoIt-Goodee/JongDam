@@ -42,7 +42,7 @@
                         if (ba == null) {
                         ba = new BookApply(); // 기본 Book 객체 생성
                     }%>
-                <form action="/book/edit" name="book_edit_form" method="post">
+                <form action="/book/registerEnd" name="book_edit_form" method="post">
                     <label for="book_img">이미지 등록:</label>
                     <input type="text" name="book_img" id="book_img">
                     <hr>
@@ -62,7 +62,9 @@
                         <option value="3">장편소설</option>
                     </select>
                     <hr>
-                    <input type="button" value="수정" onclick="book_update();">
+                    <input type="hidden" name= "apply_no" name="apply_no" value="<%= ba.getApply_no()%>">
+                    <input type="button" value="등록" onclick="book_plus();">
+                    </form>
                     <input type="button" value="초기화" onclick="book_reset();">
                 </form>
             </div>
@@ -70,7 +72,7 @@
     </section>
 </main>
 <script>
-function book_update() {
+function book_plus() {
     const form = document.book_edit_form;
     if (!form.book_img.value) {
         alert("이미지주소를 입력하세요");
@@ -83,7 +85,7 @@ function book_update() {
     } else {
         alert("등록되었습니다!");
         form.submit();
-    }
+    };
 }
 
 function book_reset() {

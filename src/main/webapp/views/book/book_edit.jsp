@@ -39,10 +39,9 @@
         <div class="book_icon">
             <div class="book">
             <%  Book bk = (Book) request.getAttribute("Bookedit"); 
-                        if (bk == null) {
-                        bk = new Book(); // 기본 Book 객체 생성
-                    }%>
+                    %>
                 <form action="/book/edit" name="book_edit_form" method="post">
+                	<input type="hidden" name = "book_no" id = "book_no" value="<%= bk.getBook_no()%>">
                     <label for="book_img">이미지 등록:</label>
                     <input type="text" name="book_img" id="book_img" value="<%= bk.getBook_img() %>">
                     <hr>

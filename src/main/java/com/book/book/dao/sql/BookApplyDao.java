@@ -16,6 +16,50 @@ import com.book.book.vo.BookApply;
 
 public class BookApplyDao {
 	
+	public int createBook(Book bk) {
+		 Connection conn = getConnection();
+	      PreparedStatement pstmt = null;
+	      int result = 0;
+	      try {
+	         String sql = "INSERT INTO `book`(`books_title`, `books_author` , `books_category_no`, `books_publisher_name`, `books_img`) VALUES(?,?,?,?,?)";
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, bk.getBook_title());
+	         pstmt.setString(2, bk.getBook_author());
+	         pstmt.setInt(3, bk.getBook_category_no());
+	         pstmt.setString(4, bk.getBook_publisher_name());
+	         pstmt.setString(5, bk.getBook_img());
+	         result = pstmt.executeUpdate();
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(pstmt);
+	         close(conn);
+	      }
+	      return result;
+	   }
+	
+	public int statusupdown(BookApply ba) {
+		Connection conn = getConnection();
+	      int result = 0;
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      try {
+			String sql = "SELECT apply_bk_status FROM book_apply WHERE apply_no = ?";
+			pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, ba.getApply_no());
+            rs = pstmt.executeQuery();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+			close(conn);
+		}
+	      return result;
+	}
+	
+	
+	
 	public int selectBookApplyCount(BookApply option) {
 	      Connection conn = getConnection();
 	      int result = 0;

@@ -68,19 +68,20 @@
                         <% 
                         List<Map<String,String>> list = (List<Map<String,String>>)request.getAttribute("resultList");
                         for(int i = 0 ; i < list.size(); i++){ 
+                        	int status = Integer.parseInt(list.get(i).get("apply_bk_status"));
                         %>
                             <tr>
                                 <td><%=list.get(i).get("apply_bk_title")%></td>
                                 <td><%=list.get(i).get("apply_bk_author")%></td>
                                 <td><%=list.get(i).get("apply_bk_publisher")%></td>
-                                <td><%=list.get(i).get("apply_bk_status")%></td>
+                                <td><%=status == 1 ? "등록됨" : (status == -1 ? "반려됨" : "대기중")%></td>
                                 <td> 
                                     <form action="/book/enterEnd?apply_no=<%=list.get(i).get("apply_no") %>" method="post">
                                         <input type="submit" value="등록">
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="/deleteend/book" method="post">
+                                    <form action="/book/reject" method="post">
                                         <input type="hidden" id="books_img" name="books_img" value="<%=list.get(i).get("apply_no") %>">
                                         <input type="submit" value="반려">
                                     </form>
@@ -97,19 +98,37 @@
         <div class="center">
             <div class="pagination">
                 <% if (paging.isPrev()) { %>
-                    <a href="/book/request?nowPage=<%= (paging.getPageBarStart() - 1) %>">&laquo;</a>
+                    <a href="/book/requestEnd?nowPage=<%= (paging.getPageBarStart() - 1) %>">&laquo;</a>
                 <% } %>
                 <% for (int i = paging.getPageBarStart(); i <= paging.getPageBarEnd(); i++) { %>
-                    <a href="/book/request?nowPage=<%= i %>" 
+                    <a href="/book/requestEnd?nowPage=<%= i %>" 
                     <%= paging.getNowPage() == i ? "class='active'" : "" %>>
                         <%= i %>
                     </a>
                 <% } %>
                 <% if (paging.isNext()) { %>
-                    <a href="/book/request?nowPage=<%= (paging.getPageBarEnd() + 1) %>">&raquo;</a>
+                    <a href="/book/requestEnd?nowPage=<%= (paging.getPageBarEnd() + 1) %>">&raquo;</a>
                 <% } %>
             </div>
         </div>
     <% } %>
+    
+<script>
+function checkRegistrationStatus(status) {
+    if (status == 1) {
+        alert("이미 등록되어 있습니다");
+        return false;
+    }
+    return true;
+}
+
+function checkRejectionStatus(status) {
+    if (status == -1) {
+        alert("이미 반려되었습니다");
+        return false;
+    }
+    return true;
+}
+</script>
 </body>
 </html>

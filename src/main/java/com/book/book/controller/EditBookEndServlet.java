@@ -31,6 +31,7 @@ public class EditBookEndServlet extends HttpServlet {
 		bk.setBook_no(bookno);
 		int result = new BookDao().selecteditBook(bk);
 		RequestDispatcher view = null;
+		System.out.println(bk.getBook_no());
 		if(result > 0) {
 			System.out.println("확인1");			
 				request.setAttribute("Bookedit", bk);
