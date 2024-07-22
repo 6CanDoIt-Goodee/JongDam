@@ -34,32 +34,32 @@
             <li>문의 사항 관리 페이지</li>
         </ul>
     </section>
-     <%@ page import="com.book.book.vo.Book, java.util.*" %>
+     <%@ page import="com.book.book.vo.BookApply, java.util.*" %>
     <section id="right">
         <div class="book_icon">
             <div class="book">
-            <%  Book bk = (Book) request.getAttribute("Bookedit"); 
-                        if (bk == null) {
-                        bk = new Book(); // 기본 Book 객체 생성
+            <%  BookApply ba = (BookApply) request.getAttribute("Bookenter"); 
+                        if (ba == null) {
+                        ba = new BookApply(); // 기본 Book 객체 생성
                     }%>
                 <form action="/book/edit" name="book_edit_form" method="post">
                     <label for="book_img">이미지 등록:</label>
-                    <input type="text" name="book_img" id="book_img" value="<%= bk.getBook_img() %>">
+                    <input type="text" name="book_img" id="book_img">
                     <hr>
                     <label for="book_title">도서명: </label>
-                    <input type="text" name="book_title" id="book_title" value="<%= bk.getBook_title()%>">
+                    <input type="text" name="book_title" id="book_title" value="<%= ba.getApply_bk_title()%>">
                     <hr>
                     <label for="book_author">저자: </label>
-                    <input type="text" name="book_author" id="book_author" value="<%= bk.getBook_author()%>">
+                    <input type="text" name="book_author" id="book_author" value="<%= ba.getApply_bk_author()%>">
                     <hr>
                     <label for="book_publisher">출판사: </label>
-                    <input type="text" name="book_publisher" id="book_publisher" value="<%= bk.getBook_publisher_name() %>">
+                    <input type="text" name="book_publisher" id="book_publisher" value="<%= ba.getApply_bk_publisher() %>">
                     <hr>
                     <label for="book_category">카테고리: </label>
                      <select name="book_category" id="book_category">
-                        <option value="1" <%= bk.getBook_category_no() == 1 ? "selected" : "" %>>문학</option>
-                        <option value="2" <%= bk.getBook_category_no() == 2 ? "selected" : "" %>>단편소설</option>
-                        <option value="3" <%= bk.getBook_category_no() == 3 ? "selected" : "" %>>장편소설</option>
+                        <option value="1">문학</option>
+                        <option value="2">단편소설</option>
+                        <option value="3">장편소설</option>
                     </select>
                     <hr>
                     <input type="button" value="수정" onclick="book_update();">
@@ -81,7 +81,7 @@ function book_update() {
     } else if (!form.book_publisher.value) {
         alert("출판사를 입력하세요");
     } else {
-        alert("수정되었습니다!");
+        alert("등록되었습니다!");
         form.submit();
     }
 }

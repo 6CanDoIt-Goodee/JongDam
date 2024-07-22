@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.book.book.vo.Book;
 import com.book.book.vo.BookApply;
 
 public class BookApplyDao {
@@ -42,6 +43,33 @@ public class BookApplyDao {
 	   }
 	
 	
+	public int selectEnterBook(BookApply ba) {
+		   Connection conn = getConnection();
+		   int result = 0;
+		   PreparedStatement pstmt = null;
+		   ResultSet rs = null;
+		   try {
+			   String sql = "SELECT * FROM book_apply WHERE apply_no = ?";
+			   pstmt = conn.prepareStatement(sql);
+			   pstmt.setInt(1, ba.getApply_no());
+			   rs = pstmt.executeQuery();
+			   
+			   if(rs.next()) {
+				    ba.setApply_bk_title(rs.getString("apply_bk_title"));
+		            ba.setApply_bk_author(rs.getString("apply_bk_author"));
+		            ba.setApply_bk_publisher(rs.getString("apply_bk_publisher"));
+		            result = 1;
+			   }
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+			close(conn);
+		}
+		   return result;
+	   }
+	
 	
 	
 	
@@ -51,7 +79,7 @@ public class BookApplyDao {
 	      PreparedStatement pstmt = null;
 	      ResultSet rs = null;
 	      try {
-	         String sql = "SELECT apply_no AS 신청번호, apply_bk_title AS 신청도서, apply_bk_author AS 신청작가, apply_bk_publisher AS 신청출판사 FROM book_apply ";
+	         String sql = "SELECT apply_no AS 신청번호, apply_bk_title AS 신청도서, apply_bk_author AS 신청작가, apply_bk_publisher AS 신청출판사, apply_bk_status AS 진행상황 FROM book_apply ";
 	            
 	         if(option.getApply_no() != 0) {
 	            sql += " WHERE apply_no Like CONCAT('%','" + option.getApply_no() + "', '%')"; 
@@ -64,8 +92,9 @@ public class BookApplyDao {
 	                   Map<String, String> row = new HashMap<>();
 	                   row.put("apply_no",rs.getString("신청번호"));
 	                   row.put("apply_bk_title", rs.getString("신청도서"));
-	                   row.put("appy_bk_author", rs.getString("신청작가"));
+	                   row.put("apply_bk_author", rs.getString("신청작가"));
 	                   row.put("apply_bk_publisher", rs.getString("신청출판사"));
+	                   row.put("apply_bk_status", rs.getString("진행상황"));
 	                   list.add(row);
 	                   System.out.println(list);
 	               }

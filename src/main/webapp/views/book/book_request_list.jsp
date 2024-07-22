@@ -56,13 +56,12 @@
                     </colgroup>
                     <thead>
                         <tr>
-                        	<th>이미지</th>
                             <th>도서명</th>
                             <th>저자</th>
-                            <th>카테고리</th>
                             <th>출판사</th>
-                            <th>수정</th>
-                            <th>삭제</th>
+                            <th>진행상태</th>
+                            <th>등록</th>
+                            <th>반려</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,12 +70,12 @@
                         for(int i = 0 ; i < list.size(); i++){ 
                         %>
                             <tr>
-                                <td><%=list.get(i).get("apply_no") %></td> 
                                 <td><%=list.get(i).get("apply_bk_title")%></td>
                                 <td><%=list.get(i).get("apply_bk_author")%></td>
                                 <td><%=list.get(i).get("apply_bk_publisher")%></td>
+                                <td><%=list.get(i).get("apply_bk_status")%></td>
                                 <td> 
-                                    <form action="/book/edit?books_no=<%=list.get(i).get("apply_no") %>" method="post">
+                                    <form action="/book/enterEnd?apply_no=<%=list.get(i).get("apply_no") %>" method="post">
                                         <input type="submit" value="등록">
                                     </form>
                                 </td>
