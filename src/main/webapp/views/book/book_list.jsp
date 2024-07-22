@@ -75,14 +75,15 @@
                                     <td><%=list.get(i).get("books_category_name")%></td>
                                     <td><%=list.get(i).get("books_publisher_name")%></td>
 									<td>
-										<form action="/book/edit" method="post">
+										<form action="/book/editEnd" method="post">
+										<input type="hidden" name="book_no" value="<%= list.get(i).get("books_no") %>">
 	                                    	<input type="submit" value="수정">
 	                                	</form>
                                 	</td>
                                 	<td>
 		                                <form action="/deleteend/book" method="post">
 		                                	<input type="hidden" id="books_img" name="books_img" value="<%=list.get(i).get("books_img") %>">
-		                                    <input type="submit" value="삭제">
+		                                    <input type="submit" value="삭제" onclick= "delect_list()">
 		                                </form>
 	                                </td>
                                 </tr>
@@ -113,6 +114,5 @@
 <% 
 }
 %>
-
 </body>
 </html>

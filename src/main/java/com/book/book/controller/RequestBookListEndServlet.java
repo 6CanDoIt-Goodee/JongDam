@@ -28,15 +28,14 @@ public class RequestBookListEndServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int apply_no = (Integer.parseInt(request.getParameter("")));
+
 		BookApply option = new BookApply();
-		option.setApply_no(apply_no);
 		
 		String nowPage = request.getParameter("nowPage");
 		if(nowPage != null) {
 			option.setNowPage(Integer.parseInt(nowPage));
 		}
-//	
+		
 		option.setTotalData(new BookApplyDao().selectBookApplyCount(option));
 		
 		List<Map<String,String>> list =  new BookApplyDao().SelectBookApplyList(option);
@@ -45,8 +44,13 @@ public class RequestBookListEndServlet extends HttpServlet {
 		RequestDispatcher view = null;
 		if(!list.isEmpty()) {
 
-			view = request.getRequestDispatcher("/book/request");
-			view.forward(request, response);
+	        view = request.getRequestDispatcher("/views/book/book_request_list.jsp");
+	        view.forward(request, response);
+			
+	} else {
+        view = request.getRequestDispatcher("/views/book/book_request_list.jsp");
+        view.forward(request, response);
+
 	}
 	}
 

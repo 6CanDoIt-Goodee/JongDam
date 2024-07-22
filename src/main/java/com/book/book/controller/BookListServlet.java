@@ -27,10 +27,10 @@ public class BookListServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String title = "";
+
 
 		Book option = new Book();
-		option.setBook_title(title);
+
 		
 		String nowPage = request.getParameter("nowPage");
 		if(nowPage != null) {

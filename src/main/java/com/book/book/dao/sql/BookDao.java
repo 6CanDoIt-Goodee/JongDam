@@ -37,6 +37,43 @@ public class BookDao {
    }
    
    
+   
+   public int selecteditBook(Book bk) {
+	   Connection conn = getConnection();
+	   int result = 0;
+	   PreparedStatement pstmt = null;
+	   ResultSet rs = null;
+	   try {
+		   String sql = "SELECT * FROM book WHERE books_no = ?";
+		   pstmt = conn.prepareStatement(sql);
+		   pstmt.setInt(1,bk.getBook_no());
+		   rs = pstmt.executeQuery();
+		   
+		   if(rs.next()) {
+			    bk.setBook_img(rs.getString("books_img"));
+			    bk.setBook_title(rs.getString("books_title"));
+	            bk.setBook_author(rs.getString("books_author"));
+	            bk.setBook_publisher_name(rs.getString("books_publisher_name"));
+	            bk.setBook_category_no(rs.getInt("books_category_no"));
+	            bk.setBook_img(rs.getString("books_img"));
+	            result = 1;
+		   }
+	} catch (Exception e) {
+		e.printStackTrace();
+	} finally {
+		close(rs);
+		close(pstmt);
+		close(conn);
+	}
+	   return result;
+   }
+   
+   
+   
+   
+   
+   
+   
 
    public int selectBookCount(Book option) {
       Connection conn = getConnection();
@@ -46,7 +83,7 @@ public class BookDao {
       try {
          String sql = "SELECT COUNT(*) AS cnt FROM book";
          if(option.getBook_title() != null) {
-            sql += " WHERE books_title LIKE CONCAT('%','"+option.getBook_title()+"','%')";
+            sql += " WHERE books_title LIKE CONCAT('%','"+option.getBook_no()+"','%')";
          }
          
          pstmt = conn.prepareStatement(sql);
@@ -70,11 +107,11 @@ public class BookDao {
       PreparedStatement pstmt = null;
       ResultSet rs = null;
       try {
-         String sql = "SELECT a.books_img AS 이미지, a.books_title AS 도서이름, a.books_author AS 저자, b.books_category_name AS 카테고리 , a.books_publisher_name AS 출판사 FROM book a\r\n"
-               + "JOIN books_category b ON a.books_category_no = b.books_category_no";
+         String sql = "SELECT a.books_no AS 도서번호, a.books_img AS 이미지, a.books_title AS 도서이름, a.books_author AS 저자, b.books_category_name AS 카테고리 , a.books_publisher_name AS 출판사 FROM book a\r\n"
+         		+ "JOIN books_category b ON a.books_category_no = b.books_category_no";
             
          if(option.getBook_title() != null) {
-            sql += " WHERE books_title Like CONCAT('%','" + option.getBook_title() + "', '%')"; 
+            sql += " WHERE books_no Like CONCAT('%','" + option.getBook_no() + "', '%')"; 
          }
          sql += " LIMIT "+option.getLimitPageNo()+", "+option.getNumPerPage();
          
@@ -82,7 +119,7 @@ public class BookDao {
          rs = pstmt.executeQuery();
            while(rs.next()){
                    Map<String, String> row = new HashMap<>();
-           
+                   row.put("books_no", rs.getString("도서번호"));
                    row.put("books_img",rs.getString("이미지"));
                    row.put("books_title", rs.getString("도서이름"));
                    row.put("books_author", rs.getString("저자"));
@@ -123,13 +160,14 @@ public class BookDao {
       PreparedStatement pstmt = null;
       int result = 0;
       try {
-         String sql = "UPDATE `book` SET books_img = ?, books_title = ?, books_author =? , books_category_no = ?, books_publisher_name = ?";
+         String sql = "UPDATE `book` SET books_img = ?, books_title = ?, books_author =? , books_category_no = ?, books_publisher_name = ? WHERE books_no = ?";
          pstmt = conn.prepareStatement(sql);
          pstmt.setString(1, bk.getBook_img());
          pstmt.setString(2, bk.getBook_title());
          pstmt.setString(3, bk.getBook_author());
          pstmt.setInt(4, bk.getBook_category_no());
          pstmt.setString(5, bk.getBook_publisher_name());
+         pstmt.setInt(6, bk.getBook_no());
          
       } catch (Exception e) {
          e.printStackTrace();

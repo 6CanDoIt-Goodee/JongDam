@@ -51,16 +51,16 @@
                     <hr>
                     <label for="book_category">카테고리: </label>
                     <select name="book_category" id="book_category">
-                        <option value="0">문학</option>
-                        <option value="1">단편소설</option>
-                        <option value="2">장편소설</option>
-						<option value="3">d</option>
+                        <option value="1">문학</option>
+                        <option value="2">단편소설</option>
+                        <option value="3">장편소설</option>
 						<option value="4">d</option>
 						<option value="5">d</option>
 						<option value="6">d</option>
 						<option value="7">d</option>
 						<option value="8">d</option>
 						<option value="9">d</option>
+						<option value="10">d</option>
                     </select>
                     <hr>
                     <input type="button" value="등록" onclick="book_plus();"><br>
@@ -72,21 +72,25 @@
 </main>
 <script>
 function book_plus(){
-    const form = document.book_request_form;
+    const form = document.forms['book_request_form'];
+    console.log("book_img: " + form.book_img.value);
+    console.log("book_title: " + form.book_title.value);
+    console.log("book_author: " + form.book_author.value);
+    console.log("book_publisher: " + form.book_publisher.value);
     if(!form.book_img.value){
-    	alert("이미지주소를 입력하세요")
-    }
-    else if(!form.book_title.value){
+        alert("이미지주소를 입력하세요");
+    } else if(!form.book_title.value){
         alert("도서명을 입력하세요");
     } else if(!form.book_author.value){
         alert("저자명을 입력하세요");
-    } else if(!form.book_publihser.value){
+    } else if(!form.book_publisher.value){
         alert("출판사를 입력하세요");
     } else {
-    	alert("등록되었습니다!")
+        alert("등록되었습니다!");
         form.submit();
     }
 }
+
 function book_reset(){
     const form = document.book_request_form;
 	form.book_img.value = '';

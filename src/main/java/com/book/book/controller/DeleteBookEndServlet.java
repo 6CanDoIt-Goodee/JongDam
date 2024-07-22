@@ -37,8 +37,8 @@ public class DeleteBookEndServlet extends HttpServlet {
 			bk.setBook_img(bookimg);
 			
 			int result = new BookDao().deleteBook(bk);
-			response.sendRedirect("/delect/book"); 
+			
+			response.sendRedirect("/book/list");
+			}
 		}
 	}
-
-}

@@ -21,9 +21,9 @@ public class BookApplyDao {
 	      PreparedStatement pstmt = null;
 	      ResultSet rs = null;
 	      try {
-	         String sql = "SELECT COUNT(*) AS cnt FROM book";
+	         String sql = "SELECT COUNT(*) AS cnt FROM book_apply";
 	         if(option.getApply_no() != 0) {
-	            sql += " WHERE books_title LIKE CONCAT('%','"+option.getApply_no()+"','%')";
+	            sql += " WHERE apply_no LIKE CONCAT('%','"+option.getApply_no()+"','%')";
 	         }
 	         
 	         pstmt = conn.prepareStatement(sql);
@@ -74,6 +74,7 @@ public class BookApplyDao {
 	      } finally {
 	         close(rs);
 	         close(pstmt);
+	         close(conn);
 	      }
 	      return list;
 	   }
