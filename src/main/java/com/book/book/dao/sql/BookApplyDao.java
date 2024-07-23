@@ -38,13 +38,13 @@ public class BookApplyDao {
 	      return result;
 	   }
 	
-	public int statusupdown(BookApply ba) {
+	public int statusup(BookApply ba) {
 		Connection conn = getConnection();
 	      int result = 0;
 	      PreparedStatement pstmt = null;
 	      ResultSet rs = null;
 	      try {
-			String sql = "SELECT apply_bk_status FROM book_apply WHERE apply_no = ?";
+			String sql = "UPDATE book_apply SET apply_bk_status = 1 WHERE apply_no = ?";
 			pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, ba.getApply_no());
             rs = pstmt.executeQuery();
@@ -59,6 +59,25 @@ public class BookApplyDao {
 	}
 	
 	
+	public int statusdown(BookApply ba) {
+		Connection conn = getConnection();
+	      int result = 0;
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      try {
+			String sql = "UPDATE book_apply SET apply_bk_status = -1 WHERE apply_no = ?";
+			pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, ba.getApply_no());
+            rs = pstmt.executeQuery();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+			close(conn);
+		}
+	      return result;
+	}
 	
 	public int selectBookApplyCount(BookApply option) {
 	      Connection conn = getConnection();

@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.book.book.dao.sql.BookApplyDao;
 import com.book.book.dao.sql.BookDao;
 import com.book.book.vo.Book;
+import com.book.book.vo.BookApply;
 
 
 @WebServlet("/book/registerEnd")
@@ -33,7 +35,10 @@ public class RequestBookRegisterEndServlet extends HttpServlet {
 		bk.setBook_category_no(bookcategory);
 		int result = new BookDao().createBook(bk);
 		System.out.println(result);
-		
+		int applyno = Integer.parseInt(request.getParameter("apply_no"));
+		BookApply ba = new BookApply();
+		ba.setApply_no(applyno);
+		new BookApplyDao().statusup(ba);
 		response.sendRedirect("/book/create");
 	}
 

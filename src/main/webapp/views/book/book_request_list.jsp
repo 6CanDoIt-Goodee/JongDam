@@ -81,8 +81,8 @@
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="/book/reject" method="post">
-                                        <input type="hidden" id="books_img" name="books_img" value="<%=list.get(i).get("apply_no") %>">
+                                    <form action="/book/rejectEnd" method="post">
+                                        <input type="hidden" id="apply_no" name="apply_no" value="<%=list.get(i).get("apply_no") %>">
                                         <input type="submit" value="반려">
                                     </form>
                                 </td>
