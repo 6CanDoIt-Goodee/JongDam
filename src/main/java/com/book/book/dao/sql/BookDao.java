@@ -142,9 +142,9 @@ public class BookDao {
       PreparedStatement pstmt = null;
       int result = 0;
       try {
-         String sql = "DELETE FROM book WHERE books_img = ?";
+         String sql = "DELETE FROM book WHERE books_no = ?";
          pstmt = conn.prepareStatement(sql);
-         pstmt.setString(1, bk.getBook_img());
+         pstmt.setInt(1, bk.getBook_no());
          result = pstmt.executeUpdate();
       } catch (Exception e) {
          e.printStackTrace();

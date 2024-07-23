@@ -82,7 +82,7 @@
                                 	</td>
                                 	<td>
 		                                <form action="/deleteend/book" method="post">
-		                                	<input type="hidden" id="books_img" name="books_img" value="<%=list.get(i).get("books_img") %>">
+		                                	<input type="hidden" id="books_no" name="books_no" value="<%=list.get(i).get("books_no") %>">
 		                                    <input type="submit" value="삭제" onclick= "delect_list()">
 		                                </form>
 	                                </td>

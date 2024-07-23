@@ -28,17 +28,13 @@ public class DeleteBookEndServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String bookimg = request.getParameter("books_img");
-		System.out.println(bookimg);
-		if (bookimg != null && !bookimg.isEmpty()) {
+		int bookno = Integer.parseInt(request.getParameter("books_no"));
+		System.out.println(bookno);	
+		Book bk = new Book();
+		bk.setBook_no(bookno);
 			
+		int result = new BookDao().deleteBook(bk);
 			
-			Book bk = new Book();
-			bk.setBook_img(bookimg);
-			
-			int result = new BookDao().deleteBook(bk);
-			
-			response.sendRedirect("/book/list");
+		response.sendRedirect("/book/list");
 			}
 		}
-	}
